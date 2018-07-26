@@ -1,0 +1,58 @@
+/*
+	El arreglo de booleanos representa los números.  Si estan en verdadero
+	quiere decir que no están "tachados", si estan en falso, se descartan dichos números.
+	
+	Como es un arreglo de una sucesión de número a partir de 2, basta con sumar +2 a una
+	posición n para saber cuál número es.  Por ejemplo, si tengo un contador en 7, se sabe
+	que 7+2=9, el 9 está en la posición 7 del arreglo.
+	
+	El algoritmo se detiene cuando el cuadrado del primer número sin tachar es mayor a numero (el parámetro).
+*/
+
+ini criba(numero):
+		
+	si: numero >= 2
+	(
+		numero_multiplo = 2;			// Al iniciar, el primer número siempre será el 2.
+		
+		arreglo[numero-1] = verdadero;	// Arreglo de booleanos, todos en verdadero.
+		
+		mientras: numero_multiplo * numero_multiplo < numero
+		(
+										//Descarto los múltiplos del número
+										// numero_multiplo-1 es para estar en la posicion siguiente a número múltiplo.
+			para: contador = numero_multiplo - 1, contador < arreglo.tamano, contador + 1
+			(
+										// Se inicia desde la posición+1 del numero_multiplo.
+				si: contador+2 % numero_multiplo == 0
+				(
+										// Si el número es múltiplo, se descarta.
+					arreglo[contador] = falso;
+				)
+			)
+			
+			numero_multiplo = ->proximo_numero_sin_tachar(arreglo, numero_multiplo);
+			// Se obtiene el siguiente número sin tachar, sin incluir a numero_multiplo.
+		)
+		
+		ret arreglo;					// Devuelve el arreglo de booleanos.
+	)
+	sino
+	(
+		ret nulo;						// Error, solo número mayor o igual a 2.
+	)
+	
+fin criba
+
+
+ini proximo_numero_sin_tachar(arreglo, inicio_posicion):
+
+	contador = inicio_posicion+1;
+
+	mientras: arreglo[contador] == falso && contador < arreglo.tamano	// Si encuentra un número sin tachar, se detiene.
+	(
+		contador = contador+1;
+	)
+	ret contador;														// Retorno la posición del número sin tachar.
+	
+fin proximo_numero_sin_tachar

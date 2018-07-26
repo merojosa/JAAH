@@ -1,0 +1,13 @@
+ini criba(tam, m):
+    para: i = 2, i <= tam, i+1(
+        m[i] = verdadero;
+    )
+
+    para: i = 2, i*i <= tam, i+1(
+        si: m[i]==verdadero (
+            para: h = 2, i*h <= tam, h+1(
+                m[i*h] = false;
+        )
+    )
+    )
+fin

@@ -1,0 +1,2 @@
+salida: "Introduzca un carácter"
+salida: "Introduzca un numero entero positivo"
